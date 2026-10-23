@@ -1,0 +1,123 @@
+<section id="contato" class="section contact" aria-labelledby="contact-title">
+  <div class="contact__glow" aria-hidden="true"></div>
+
+  <div class="shell contact__grid">
+    <div class="contact__content" appReveal>
+      <p class="eyebrow">Contato</p>
+      <h2 id="contact-title" class="contact__title">
+        Vamos transformar sua ideia em um <span class="accent">projeto?</span>
+      </h2>
+      <p class="contact__lead">
+        Conte um pouco sobre o que você precisa desenvolver. Podemos conversar sobre suas ideias, necessidades e
+        possibilidades para o projeto.
+      </p>
+
+      <div class="contact__actions">
+        @if (whatsappHref) {
+          <a class="btn btn--primary" [href]="whatsappHref" target="_blank" rel="noopener noreferrer">
+            <lucide-icon [img]="icons.whatsapp" [size]="18" aria-hidden="true" />
+            Conversar no WhatsApp
+          </a>
+        }
+        @if (emailHref) {
+          <a class="btn btn--ghost" [href]="emailHref">
+            <lucide-icon [img]="icons.mail" [size]="18" aria-hidden="true" />
+            Enviar e-mail
+          </a>
+        }
+      </div>
+
+      <ul class="channels" aria-label="Canais de contato">
+        @for (channel of channels; track channel.label) {
+          <li>
+            <a
+              class="channel"
+              [href]="channel.href"
+              [attr.target]="channel.external ? '_blank' : null"
+              [attr.rel]="channel.external ? 'noopener noreferrer' : null"
+            >
+              <span class="channel__icon" aria-hidden="true">
+                <lucide-icon [img]="channel.icon" [size]="18" [strokeWidth]="1.75" />
+              </span>
+              <span class="channel__text">
+                <span class="channel__label">{{ channel.label }}</span>
+                <span class="channel__value">{{ channel.value }}</span>
+              </span>
+              <lucide-icon class="channel__arrow" [img]="icons.external" [size]="16" aria-hidden="true" />
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <form class="composer" [formGroup]="form" (ngSubmit)="send('whatsapp')" novalidate [appReveal]="120">
+      <div class="composer__head">
+        <h3 class="composer__title">Monte sua mensagem</h3>
+        <p class="composer__hint">
+          Preencha os campos e escolha por onde enviar. A mensagem é aberta no WhatsApp ou no seu aplicativo de e-mail,
+          pronta para você revisar.
+        </p>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="contact-name">Seu nome</label>
+        <input
+          id="contact-name"
+          class="field__control"
+          type="text"
+          formControlName="name"
+          autocomplete="name"
+          maxlength="80"
+          [attr.aria-invalid]="showError('name')"
+          [attr.aria-describedby]="showError('name') ? 'contact-name-error' : null"
+        />
+        @if (showError('name')) {
+          <p id="contact-name-error" class="field__error">Informe seu nome.</p>
+        }
+      </div>
+
+      <fieldset class="field">
+        <legend class="field__label">Tipo de projeto <span>(opcional)</span></legend>
+        <div class="options">
+          @for (type of projectTypes; track type) {
+            <label class="option">
+              <input type="radio" formControlName="projectType" [value]="type" name="projectType" />
+              <span>{{ type }}</span>
+            </label>
+          }
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label class="field__label" for="contact-message">Como posso ajudar?</label>
+        <textarea
+          id="contact-message"
+          class="field__control"
+          formControlName="message"
+          rows="5"
+          maxlength="1500"
+          placeholder="Descreva sua ideia, o problema que deseja resolver ou o que precisa desenvolver."
+          [attr.aria-invalid]="showError('message')"
+          [attr.aria-describedby]="showError('message') ? 'contact-message-error' : null"
+        ></textarea>
+        @if (showError('message')) {
+          <p id="contact-message-error" class="field__error">Escreva uma mensagem com pelo menos 10 caracteres.</p>
+        }
+      </div>
+
+      <div class="composer__actions">
+        @if (whatsappHref) {
+          <button type="submit" class="btn btn--primary">
+            Enviar pelo WhatsApp
+            <lucide-icon class="btn__icon" [img]="icons.send" [size]="17" aria-hidden="true" />
+          </button>
+        }
+        @if (emailHref) {
+          <button type="button" class="btn btn--ghost" (click)="send('email')">
+            Enviar por e-mail
+          </button>
+        }
+      </div>
+    </form>
+  </div>
+</section>

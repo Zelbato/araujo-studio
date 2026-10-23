@@ -1,0 +1,316 @@
+:host {
+  display: block;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  // Sobe por trás do header fixo para que o fundo ocupe a primeira dobra inteira.
+  margin-top: calc(-1 * var(--header-h));
+  padding-top: calc(var(--header-h) + clamp(2.5rem, 7vw, 5rem));
+
+  @media (min-width: 1024px) {
+    min-height: min(100svh, 62rem);
+  }
+}
+
+.hero__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60rem 36rem at 82% 18%, rgb(22 119 255 / 0.16), transparent 62%),
+    radial-gradient(40rem 30rem at 0% 100%, rgb(22 119 255 / 0.06), transparent 70%),
+    linear-gradient(180deg, var(--color-ink-950) 0%, var(--color-ink-900) 100%);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-line-strong) 30%, var(--color-line-strong) 70%, transparent);
+  }
+}
+
+.hero__grid {
+  display: grid;
+  gap: clamp(3.5rem, 8vw, 4.5rem);
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 3rem;
+  }
+}
+
+// Conteúdo
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.4375rem 0.875rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 999px;
+  background: rgb(248 250 252 / 0.025);
+  color: var(--color-silver-300);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero__badge-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--color-brand-500);
+  box-shadow: 0 0 0 3px rgb(22 119 255 / 0.18), 0 0 10px rgb(22 119 255 / 0.9);
+}
+
+.hero__title {
+  margin-top: 1.5rem;
+  font-size: clamp(2.875rem, 8vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+
+  .accent {
+    display: block;
+    padding-bottom: 0.08em;
+  }
+}
+
+.hero__lead {
+  max-width: 30rem;
+  margin-top: 1.5rem;
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  line-height: 1.7;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+
+  @media (max-width: 379px) {
+    .btn {
+      flex: 1 1 100%;
+    }
+  }
+}
+
+.hero__highlights {
+  display: grid;
+  gap: 1.125rem;
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--color-line);
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.highlight {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.highlight__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 0.625rem;
+  color: var(--color-brand-400);
+}
+
+.highlight__title {
+  display: block;
+  color: var(--color-snow);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.highlight__text {
+  display: block;
+  margin-top: 0.125rem;
+  color: var(--color-silver-500);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+// Composição visual com capturas reais
+
+.hero__visual {
+  position: relative;
+  padding-bottom: 3rem;
+
+  @media (min-width: 1024px) {
+    padding-block: 2rem 4rem;
+  }
+}
+
+// Parede de frisos com feixe de luz (referência visual)
+.hero__wall {
+  position: absolute;
+  inset: -30% -40vw -20% 18%;
+  z-index: -1;
+  background: repeating-linear-gradient(90deg, rgb(169 184 201 / 0.055) 0 1px, transparent 1px 26px);
+  mask-image: radial-gradient(closest-side at 55% 45%, #000 30%, transparent 100%);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 12%;
+    left: 34%;
+    width: 2px;
+    height: 58%;
+    background: linear-gradient(180deg, transparent, var(--color-brand-400) 45%, transparent);
+    box-shadow: 0 0 28px 4px rgb(22 119 255 / 0.45);
+    opacity: 0.8;
+  }
+}
+
+.hero__stage {
+  position: relative;
+  padding-bottom: 16%;
+  perspective: 1800px;
+}
+
+.hero__shot {
+  margin: 0;
+}
+
+.hero__shot--main {
+  position: relative;
+  margin-left: 6%;
+
+  @media (min-width: 1024px) {
+    margin-left: 4%;
+    transform: rotateY(-9deg) rotateX(2deg);
+    transform-origin: left center;
+  }
+}
+
+.hero__shot--side {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 52%;
+  filter: drop-shadow(0 24px 40px rgb(0 0 0 / 0.65));
+
+  @media (min-width: 1024px) {
+    left: -4%;
+    transform: rotateY(-9deg) translateZ(40px);
+  }
+
+  .hero__caption {
+    justify-content: flex-start;
+  }
+}
+
+.hero__caption {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.625rem;
+  color: var(--color-silver-500);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.hero__caption-name {
+  color: var(--color-silver-300);
+}
+
+// No mobile a captura secundária cobre parte da legenda principal: só o nome permanece.
+.hero__caption-category {
+  @media (max-width: 1023px) {
+    display: none;
+  }
+}
+
+.hero__note {
+  position: absolute;
+  right: 0;
+  bottom: 0.5rem;
+  display: none;
+  color: var(--color-silver-600);
+  font-size: 0.75rem;
+
+  @media (min-width: 640px) {
+    display: block;
+  }
+}
+
+// Rodapé da hero
+
+.hero__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+  padding-block: 2.5rem 1.75rem;
+}
+
+.hero__scroll,
+.hero__tags {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero__scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--color-silver-500);
+  text-decoration: none;
+  transition: color 0.25s;
+
+  &:hover {
+    color: var(--color-snow);
+  }
+}
+
+.hero__tags {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-silver-600);
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+
+  &::before {
+    content: '';
+    width: 4rem;
+    height: 1px;
+    background: var(--color-line-strong);
+  }
+
+  span+span::before {
+    content: '/';
+    margin-right: 0.75rem;
+    color: var(--color-silver-600);
+  }
+}

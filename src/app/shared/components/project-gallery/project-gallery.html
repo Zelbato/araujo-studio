@@ -1,0 +1,83 @@
+@let total = images().length;
+
+<div
+  class="gallery"
+  role="region"
+  aria-roledescription="carrossel"
+  [attr.aria-label]="'Capturas de ' + label()"
+  (keydown)="total > 1 && onKeydown($event)"
+>
+  @if (total) {
+    <app-browser-frame [label]="label()">
+      <div
+        class="gallery__viewport"
+        (pointerdown)="onPointerDown($event)"
+        (pointerup)="onPointerUp($event)"
+        (pointercancel)="onPointerUp($event)"
+      >
+        <div class="gallery__track" [style.transform]="'translateX(' + index() * -100 + '%)'">
+          @for (image of images(); track image.basePath; let i = $index) {
+            <figure
+              class="gallery__slide"
+              role="group"
+              aria-roledescription="slide"
+              [attr.aria-label]="i + 1 + ' de ' + total"
+              [attr.aria-hidden]="i !== index()"
+              [attr.inert]="i === index() ? null : ''"
+            >
+              <img
+                [src]="src(image)"
+                [srcset]="srcset(image)"
+                [sizes]="sizes()"
+                [width]="image.width"
+                [height]="image.height"
+                [alt]="image.alt"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              />
+            </figure>
+          }
+        </div>
+      </div>
+    </app-browser-frame>
+  } @else {
+    <app-browser-frame [label]="label()" [image]="null" />
+  }
+
+  @if (current(); as image) {
+    <div class="gallery__footer">
+      <p class="gallery__caption" aria-live="polite">
+        {{ image.caption }}
+        @if (total > 1) {
+          <span class="gallery__count">{{ index() + 1 }} / {{ total }}</span>
+        }
+      </p>
+
+      @if (total > 1) {
+        <div class="gallery__nav">
+          <button type="button" class="gallery__arrow" (click)="goTo(index() - 1)">
+            <lucide-icon [img]="icons.prev" [size]="18" aria-hidden="true" />
+            <span class="sr-only">Imagem anterior</span>
+          </button>
+          <div class="gallery__dots">
+            @for (image of images(); track image.basePath; let i = $index) {
+              <button
+                type="button"
+                class="gallery__dot"
+                [class.is-active]="i === index()"
+                [attr.aria-current]="i === index() ? 'true' : null"
+                [attr.aria-label]="'Mostrar imagem ' + (i + 1) + ': ' + image.caption"
+                (click)="goTo(i)"
+              ></button>
+            }
+          </div>
+          <button type="button" class="gallery__arrow" (click)="goTo(index() + 1)">
+            <lucide-icon [img]="icons.next" [size]="18" aria-hidden="true" />
+            <span class="sr-only">Próxima imagem</span>
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>

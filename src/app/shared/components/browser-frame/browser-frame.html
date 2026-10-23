@@ -1,0 +1,28 @@
+<div class="frame">
+  <div class="frame__bar" aria-hidden="true">
+    <span class="frame__dots"><i></i><i></i><i></i></span>
+    <span class="frame__address">{{ label() }}</span>
+  </div>
+
+  @if (image(); as img) {
+    <img
+      class="frame__image"
+      [src]="src()"
+      [srcset]="srcset()"
+      [sizes]="sizes()"
+      [width]="img.width"
+      [height]="img.height"
+      [alt]="img.alt"
+      [attr.loading]="priority() ? 'eager' : 'lazy'"
+      [attr.fetchpriority]="priority() ? 'high' : null"
+      decoding="async"
+    />
+  } @else if (image() === null) {
+    <div class="frame__placeholder">
+      <lucide-icon [img]="placeholderIcon" [size]="22" aria-hidden="true" />
+      <span>Captura da interface em breve</span>
+    </div>
+  } @else {
+    <ng-content />
+  }
+</div>

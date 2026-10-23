@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens.
+ * `static` garante que todas as variáveis sejam emitidas em :root,
+ * permitindo usá-las também nos estilos SCSS dos componentes.
+ */
+@theme static {
+  --color-ink-950: #050b17;
+  --color-ink-900: #07101f;
+  --color-ink-850: #0a1628;
+  --color-ink-800: #0e1c31;
+  --color-ink-700: #15263f;
+
+  --color-brand-300: #8cbcff;
+  --color-brand-400: #4c96ff;
+  --color-brand-500: #1677ff;
+  --color-brand-600: #0f63dc;
+  --color-brand-700: #0b52b8;
+
+  --color-silver-300: #c9d4e0;
+  --color-silver-400: #a9b8c9;
+  --color-silver-500: #8596ab;
+  /* Mínimo de contraste 4,5:1 sobre os fundos escuros para texto pequeno. */
+  --color-silver-600: #74859c;
+
+  --color-snow: #f8fafc;
+
+  --color-line: rgb(169 184 201 / 0.12);
+  --color-line-strong: rgb(169 184 201 / 0.22);
+
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}

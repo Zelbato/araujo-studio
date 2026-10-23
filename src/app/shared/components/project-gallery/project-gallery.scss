@@ -1,0 +1,110 @@
+:host {
+  display: block;
+}
+
+.gallery__viewport {
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.gallery__track {
+  display: flex;
+  transition: transform 0.6s var(--ease-out-soft);
+}
+
+.gallery__slide {
+  flex: 0 0 100%;
+  margin: 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.gallery__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  margin-top: 0.875rem;
+}
+
+.gallery__caption {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  color: var(--color-silver-500);
+  font-size: 0.8125rem;
+}
+
+.gallery__count {
+  color: var(--color-silver-600);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+
+.gallery__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gallery__arrow {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-snow);
+  cursor: pointer;
+  transition:
+    border-color 0.25s,
+    background-color 0.25s;
+
+  &:hover {
+    border-color: var(--color-brand-500);
+    background: rgb(22 119 255 / 0.12);
+  }
+}
+
+.gallery__dots {
+  display: flex;
+}
+
+// Área de toque maior que o indicador visível
+.gallery__dot {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    width: 0.4375rem;
+    height: 0.4375rem;
+    border-radius: 999px;
+    background: var(--color-silver-600);
+    transition:
+      width 0.35s var(--ease-out-soft),
+      background-color 0.25s;
+  }
+
+  &:hover::before {
+    background: var(--color-silver-400);
+  }
+
+  &.is-active::before {
+    width: 1.25rem;
+    background: var(--color-brand-500);
+  }
+}

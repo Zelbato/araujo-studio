@@ -1,0 +1,74 @@
+<dialog #dialog class="details" aria-labelledby="project-details-title" (click)="onDialogClick($event)">
+  @if (project(); as p) {
+    <div class="details__panel">
+      <header class="details__header">
+        <div>
+          <p class="details__meta">{{ p.category }} · {{ p.status }}</p>
+          <h2 id="project-details-title" class="details__title">{{ p.name }}</h2>
+        </div>
+        <button type="button" class="details__close" (click)="close()" autofocus>
+          <lucide-icon [img]="icons.close" [size]="20" aria-hidden="true" />
+          <span class="sr-only">Fechar detalhes do projeto</span>
+        </button>
+      </header>
+
+      <app-project-gallery [images]="p.images" [label]="p.name" sizes="(min-width: 768px) 46rem, 100vw" />
+
+      <div class="details__body">
+        <section class="details__block">
+          <h3>Contexto</h3>
+          <p>{{ p.context }}</p>
+        </section>
+
+        <section class="details__block">
+          <h3>Funcionalidades desenvolvidas</h3>
+          <ul class="details__features">
+            @for (feature of p.features; track feature) {
+              <li>{{ feature }}</li>
+            }
+          </ul>
+        </section>
+
+        @if (p.architecture) {
+          <section class="details__block">
+            <h3>Como foi construído</h3>
+            <p>{{ p.architecture }}</p>
+          </section>
+        }
+
+        @if (p.currentState) {
+          <section class="details__block">
+            <h3>Situação atual</h3>
+            <p>{{ p.currentState }}</p>
+          </section>
+        }
+
+        <section class="details__block">
+          <h3>Tecnologias</h3>
+          <ul class="chips">
+            @for (tech of p.stack; track tech) {
+              <li class="chip">{{ tech }}</li>
+            }
+          </ul>
+        </section>
+      </div>
+
+      @if (p.links.demo || p.links.repository) {
+        <footer class="details__footer">
+          @if (p.links.demo) {
+            <a class="btn btn--primary btn--sm" [href]="p.links.demo" target="_blank" rel="noopener noreferrer">
+              Ver demonstração
+              <lucide-icon [img]="icons.external" [size]="16" aria-hidden="true" />
+            </a>
+          }
+          @if (p.links.repository) {
+            <a class="btn btn--ghost btn--sm" [href]="p.links.repository" target="_blank" rel="noopener noreferrer">
+              <lucide-icon [img]="icons.github" [size]="16" aria-hidden="true" />
+              Código no GitHub
+            </a>
+          }
+        </footer>
+      }
+    </div>
+  }
+</dialog>

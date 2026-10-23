@@ -1,0 +1,32 @@
+<section id="processo" class="section process" aria-labelledby="process-title">
+  <div class="shell">
+    <header class="process__head" appReveal>
+      <div>
+        <p class="eyebrow">Processo</p>
+        <h2 id="process-title" class="section-title">
+          Da primeira conversa <span class="accent">à entrega.</span>
+        </h2>
+      </div>
+      <p class="process__note">
+        <span>Um processo claro e transparente</span>
+        Você acompanha cada etapa do projeto, sabendo o que está sendo feito e o que vem a seguir.
+      </p>
+    </header>
+
+    <ol class="timeline">
+      @for (step of steps; track step.number; let i = $index) {
+        <li class="step" [appReveal]="i * 90">
+          <span class="step__node" aria-hidden="true">{{ step.number }}</span>
+          <div class="step__content">
+            <h3 class="step__title">
+              <lucide-icon [img]="step.icon" [size]="18" [strokeWidth]="1.75" aria-hidden="true" />
+              <span><span class="sr-only">Etapa {{ step.number }}: </span>{{ step.title }}</span>
+            </h3>
+            <p class="step__text">{{ step.description }}</p>
+            <p class="step__outcome"><span>Resultado</span>{{ step.outcome }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

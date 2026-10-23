@@ -1,0 +1,79 @@
+<section id="inicio" class="hero" aria-labelledby="hero-title">
+  <div class="hero__backdrop" aria-hidden="true"></div>
+
+  <div class="shell hero__grid">
+    <div class="hero__content">
+      <p class="hero__badge">
+        <span class="hero__badge-dot" aria-hidden="true"></span>
+        Soluções digitais personalizadas
+      </p>
+
+      <h1 id="hero-title" class="hero__title">
+        Da ideia <span class="accent">à solução.</span>
+      </h1>
+
+      <p class="hero__lead">
+        Desenvolvo sites, sistemas e aplicações que simplificam processos, organizam informações e geram
+        resultados para o seu negócio.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#contato" class="btn btn--primary">
+          Iniciar um projeto
+          <lucide-icon class="btn__icon" [img]="icons.arrowRight" [size]="18" aria-hidden="true" />
+        </a>
+        <a href="#projetos" class="btn btn--ghost">
+          <lucide-icon [img]="icons.projects" [size]="18" aria-hidden="true" />
+          Ver projetos
+        </a>
+      </div>
+
+      <ul class="hero__highlights">
+        @for (item of highlights; track item.title) {
+          <li class="highlight">
+            <span class="highlight__icon" aria-hidden="true">
+              <lucide-icon [img]="item.icon" [size]="18" [strokeWidth]="1.75" />
+            </span>
+            <span>
+              <strong class="highlight__title">{{ item.title }}</strong>
+              <span class="highlight__text">{{ item.text }}</span>
+            </span>
+          </li>
+        }
+      </ul>
+    </div>
+
+    @if (showcase.length) {
+      <div class="hero__visual">
+        <div class="hero__wall" aria-hidden="true"></div>
+        <div class="hero__stage">
+          @for (project of showcase; track project.slug; let first = $first) {
+            <figure class="hero__shot" [class.hero__shot--main]="first" [class.hero__shot--side]="!first">
+              <app-browser-frame
+                [image]="project.image"
+                [label]="project.name"
+                [priority]="first"
+                [sizes]="first ? '(min-width: 1024px) 40vw, 90vw' : '(min-width: 1024px) 22vw, 50vw'"
+              />
+              <figcaption class="hero__caption">
+                <span class="hero__caption-name">{{ project.name }}</span>
+                <span class="hero__caption-category">{{ project.category }}</span>
+              </figcaption>
+            </figure>
+          }
+        </div>
+        <p class="hero__note">Interfaces reais de projetos desenvolvidos</p>
+      </div>
+    }
+  </div>
+
+  <div class="shell hero__footer">
+    <a href="#servicos" class="hero__scroll">
+      Role para explorar
+      <lucide-icon [img]="icons.arrowDown" [size]="14" aria-hidden="true" />
+    </a>
+    <p class="hero__tags" aria-hidden="true">
+      <span>Desenvolvimento</span><span>Tecnologia</span><span>Resultados</span>
+    </p>
+  </div>
+</section>

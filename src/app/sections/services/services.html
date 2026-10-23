@@ -1,0 +1,50 @@
+<section id="servicos" class="section services" aria-labelledby="services-title">
+  <div class="shell">
+    <header class="services__head" appReveal>
+      <div>
+        <p class="eyebrow">Serviços</p>
+        <h2 id="services-title" class="section-title">
+          Soluções pensadas para o <span class="accent">seu negócio.</span>
+        </h2>
+      </div>
+      <p class="services__intro">
+        Cada projeto parte do problema que precisa ser resolvido. A tecnologia é escolhida depois, para atender
+        ao que o seu negócio realmente precisa.
+      </p>
+    </header>
+
+    <ol class="services__list">
+      @for (service of services; track service.number; let i = $index) {
+        <li class="service" [appReveal]="i * 70">
+          <span class="service__number" aria-hidden="true">{{ service.number }}</span>
+
+          <div class="service__heading">
+            <span class="service__icon" aria-hidden="true">
+              <lucide-icon [img]="service.icon" [size]="20" [strokeWidth]="1.6" />
+            </span>
+            <h3 class="service__title">{{ service.title }}</h3>
+          </div>
+
+          <p class="service__summary">{{ service.summary }}</p>
+
+          <ul class="service__includes" [attr.aria-label]="'Inclui em ' + service.title">
+            @for (item of service.includes; track item) {
+              <li>
+                <lucide-icon [img]="icons.check" [size]="14" aria-hidden="true" />
+                {{ item }}
+              </li>
+            }
+          </ul>
+        </li>
+      }
+    </ol>
+
+    <div class="services__cta" appReveal>
+      <p>Sua necessidade não se encaixa em nenhuma dessas categorias? Ela ainda pode virar um projeto.</p>
+      <a href="#contato" class="text-link">
+        Conte sua ideia
+        <lucide-icon class="btn__icon" [img]="icons.arrowRight" [size]="16" aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</section>

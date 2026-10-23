@@ -1,0 +1,48 @@
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="#inicio" class="footer__name">Heitor <span>Araujo</span></a>
+        <p class="footer__role">{{ site.role }}</p>
+        <p class="footer__tagline">Sites, sistemas e aplicações sob medida.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Navegação do rodapé">
+        <p class="footer__label">Navegação</p>
+        <ul>
+          @for (item of navItems; track item.id) {
+            <li><a [href]="'#' + item.id">{{ item.label }}</a></li>
+          }
+        </ul>
+      </nav>
+
+      <div class="footer__social">
+        <p class="footer__label">Conecte-se</p>
+        <ul>
+          @for (social of socials; track social.label) {
+            <li>
+              <a
+                class="footer__icon"
+                [href]="social.href"
+                [attr.target]="social.label === 'E-mail' ? null : '_blank'"
+                [attr.rel]="social.label === 'E-mail' ? null : 'noopener noreferrer'"
+                [attr.aria-label]="social.label"
+                [attr.title]="social.label"
+              >
+                <lucide-icon [img]="social.icon" [size]="18" aria-hidden="true" />
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© {{ year }} {{ site.name }}. Todos os direitos reservados.</p>
+      <a href="#inicio" class="footer__top-link">
+        Voltar ao topo
+        <lucide-icon [img]="arrowUp" [size]="14" aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</footer>

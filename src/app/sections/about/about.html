@@ -1,0 +1,76 @@
+<section id="sobre" class="section about" aria-labelledby="about-title">
+  <div class="shell about__grid">
+    <div class="about__content" appReveal>
+      <p class="eyebrow">Sobre</p>
+      <h2 id="about-title" class="section-title">Sobre o <span class="accent">desenvolvedor.</span></h2>
+
+      <p class="about__statement">{{ statement }}</p>
+
+      @for (paragraph of paragraphs; track $index) {
+        <p class="about__text">{{ paragraph }}</p>
+      }
+
+      <ul class="principles">
+        @for (principle of principles; track principle.title) {
+          <li class="principle">
+            <strong>{{ principle.title }}</strong>
+            <span>{{ principle.text }}</span>
+          </li>
+        }
+      </ul>
+
+      <div class="about__actions">
+        <a href="#projetos" class="btn btn--primary">
+          Conheça os projetos
+          <lucide-icon class="btn__icon" [img]="icons.arrowRight" [size]="18" aria-hidden="true" />
+        </a>
+        @if (site.contact.linkedin) {
+          <a class="text-link" [href]="site.contact.linkedin" target="_blank" rel="noopener noreferrer">
+            <lucide-icon [img]="icons.linkedin" [size]="16" aria-hidden="true" />
+            Perfil no LinkedIn
+          </a>
+        }
+      </div>
+    </div>
+
+    <aside class="profile" aria-label="Perfil profissional" [appReveal]="120">
+      <div class="profile__portrait">
+        @if (photo) {
+          <img [src]="photo.src" [alt]="photo.alt" [width]="photo.width" [height]="photo.height" loading="lazy" decoding="async" />
+        } @else {
+          <span class="profile__monogram" aria-hidden="true">HA</span>
+        }
+      </div>
+
+      <div class="profile__identity">
+        <p class="profile__name">{{ site.name }}</p>
+        <p class="profile__role">{{ site.role }}</p>
+      </div>
+
+      <div class="profile__stack">
+        <p class="profile__label">Stack principal</p>
+        <dl class="stack">
+          @for (group of stackGroups; track group.label) {
+            <div class="stack__row">
+              <dt>{{ group.label }}</dt>
+              <dd>
+                <ul class="chips">
+                  @for (item of group.items; track item) {
+                    <li class="chip">{{ item }}</li>
+                  }
+                </ul>
+              </dd>
+            </div>
+          }
+        </dl>
+      </div>
+
+      @if (site.contact.github) {
+        <a class="profile__link" [href]="site.contact.github" target="_blank" rel="noopener noreferrer">
+          <lucide-icon [img]="icons.github" [size]="16" aria-hidden="true" />
+          Código no GitHub
+        </a>
+      }
+    </aside>
+  </div>
+</section>

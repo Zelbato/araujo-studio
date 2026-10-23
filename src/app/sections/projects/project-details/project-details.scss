@@ -1,0 +1,136 @@
+.details {
+  width: min(100% - 2rem, 50rem);
+  max-width: none;
+  max-height: min(100% - 2rem, 54rem);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 1.125rem;
+  background: var(--color-ink-900);
+  color: var(--color-silver-400);
+  box-shadow: 0 40px 120px -20px rgb(0 0 0 / 0.9);
+
+  &::backdrop {
+    background: rgb(3 7 15 / 0.78);
+    backdrop-filter: blur(6px);
+  }
+
+  // Coluna flexível: o painel interno ocupa a altura disponível e rola por dentro.
+  &[open] {
+    display: flex;
+    flex-direction: column;
+    animation: details-in 0.4s var(--ease-out-soft);
+  }
+}
+
+@keyframes details-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.98);
+  }
+}
+
+.details__panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.details__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.details__meta {
+  color: var(--color-brand-400);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.details__title {
+  margin-top: 0.5rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 600;
+}
+
+.details__close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 0.75rem;
+  background: transparent;
+  color: var(--color-snow);
+  cursor: pointer;
+  transition: background-color 0.25s;
+
+  &:hover {
+    background: rgb(248 250 252 / 0.06);
+  }
+}
+
+.details__body {
+  display: grid;
+  gap: 1.75rem;
+  margin-top: 2rem;
+}
+
+.details__block {
+  h3 {
+    margin-bottom: 0.625rem;
+    color: var(--color-snow);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  p {
+    font-size: 0.9375rem;
+  }
+}
+
+.details__features {
+  display: grid;
+  gap: 0.5rem;
+
+  li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.9375rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.7em;
+      left: 0;
+      width: 0.5rem;
+      height: 1px;
+      background: var(--color-brand-400);
+    }
+  }
+}
+
+.details__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-line);
+}
